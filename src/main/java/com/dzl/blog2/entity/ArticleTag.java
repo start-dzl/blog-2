@@ -20,9 +20,9 @@ public class ArticleTag extends Model<ArticleTag> {
 
     private static final long serialVersionUID = 1L;
 
-    private Long articleId;
+    private String articleId;
 
-    private Long tagId;
+    private String tagId;
 
 
 }

@@ -42,6 +42,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
             newUser.setPassword(md5Util.encode(input.getPassword()));
             newUser.setPhone(input.getPhone());
             newUser.setCreateTime(LocalDateTime.now());
+            newUser.setRoles(input.getRoles());
             newUser.insertOrUpdate();
             return newUser;
         }
@@ -49,7 +50,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     }
 
     @Override
-    public void deleteUser(Long id) {
+    public void deleteUser(String id) {
         getBaseMapper().deleteById(id);
+    }
+
+    @Override
+    public User detail(String id) {
+        return getBaseMapper().selectById(id);
     }
 }

@@ -6,6 +6,9 @@ spring:
     password: 1234
     type: com.alibaba.druid.pool.DruidDataSource
 
+mybatis-plus:
+  type-enums-package: com.dzl.blog2.enums
+
 
 # Logger Config
 logging:

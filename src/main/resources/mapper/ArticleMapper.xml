@@ -13,6 +13,7 @@
         <result column="lastArticleId" property="lastArticleId"/>
         <result column="nextArticleId" property="nextArticleId"/>
         <result column="likes" property="likes"/>
+        <result column="playCount" property="playCount"/>
         <collection property="tags" ofType="com.dzl.blog2.entity.Tag" columnPrefix="t_">
             <id column="id" property="id"/>
             <result column="name" property="name"/>
@@ -38,10 +39,41 @@
         last_article_id,
         next_article_id,
         likes,
+        play_count,
         t.id as t_id,
         t.name as t_name
         from article a
         left join article_tag t1 on a.id = t1.article_id
         left join tag t on t1.tag_id = t.id
+        <where>
+            <if test="key_word!=null and key_word!=''">
+                title like concat(concat('%',#{key_word}),'%')
+                or article_content like concat(concat('%',#{key_word}),'%')
+                or author like concat(concat('%',#{key_word}),'%')
+                or t.name like concat(concat('%',#{key_word}),'%')
+            </if>
+        </where>
+    </select>
+
+    <select id="findArticlePlusById" resultMap="ArticlePlus">
+        select a.id,
+        title,
+        author,
+        publish_date,
+        update_date,
+        article_content,
+        article_tabloid,
+        last_article_id,
+        next_article_id,
+        likes,
+        play_count,
+        t.id as t_id,
+        t.name as t_name
+        from article a
+        left join article_tag t1 on a.id = t1.article_id
+        left join tag t on t1.tag_id = t.id
+        <where>
+            a.id = #{id}
+        </where>
     </select>
 </mapper>

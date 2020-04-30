@@ -2,10 +2,10 @@ package com.dzl.blog2.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.dzl.blog2.dto.article.ArticleInput;
+import com.dzl.blog2.dto.article.ArticleSearchInput;
+import com.dzl.blog2.dto.page.PageBody;
 import com.dzl.blog2.entity.Article;
 import com.dzl.blog2.model.ArticlePlus;
-
-import java.util.List;
 
 
 public interface IArticleService extends IService<Article> {
@@ -13,9 +13,9 @@ public interface IArticleService extends IService<Article> {
 
     void deleteArticle(Long id);
 
-    Article changeArticle(Long id, String name);
+    boolean changeArticle(Long id, ArticleInput input);
 
-    List<Article> findByName(String name);
+    PageBody<ArticlePlus> findAll(ArticleSearchInput input);
 
-    List<ArticlePlus> findAll();
+    ArticlePlus detail(String id);
 }

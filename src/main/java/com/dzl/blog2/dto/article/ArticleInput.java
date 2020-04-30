@@ -14,5 +14,5 @@ public class ArticleInput {
 
     private String articleContent;
 
-    private List<Long> tags;
+    private List<String> tags;
 }

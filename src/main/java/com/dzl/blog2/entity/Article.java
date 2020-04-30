@@ -13,7 +13,7 @@ public class Article extends Model<Article> {
 
     private static final long serialVersionUID = 1L;
 
-    private Long id;
+    private String id;
 
     private String title;
 
@@ -27,10 +27,17 @@ public class Article extends Model<Article> {
 
     private String articleTabloid;
 
-    private Long lastArticleId;
+    private String lastArticleId;
 
-    private Long nextArticleId;
+    private String nextArticleId;
 
     private Long likes;
 
+    private Long playCount;
+
+/*    private String idStr;
+
+    public String getIdStr() {
+        return id.toString();
+    }*/
 }

@@ -27,6 +27,8 @@ CREATE TABLE article
   likes           BIGINT(20),
   PRIMARY KEY (id)
 );
+alter table article
+  add column play_count BIGINT default 0 not null;
 
 CREATE TABLE tag
 (

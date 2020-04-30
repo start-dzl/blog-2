@@ -9,7 +9,7 @@ import lombok.EqualsAndHashCode;
 public class Tag extends Model<Tag> {
 
     private static final long serialVersionUID = 1L;
-    private Long id;
+    private String id;
     /**
      * 标签名
      */

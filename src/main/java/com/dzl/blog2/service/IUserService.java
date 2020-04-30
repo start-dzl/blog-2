@@ -16,6 +16,8 @@ public interface IUserService extends IService<User> {
 
     User createUser(UserInput input);
 
-    void deleteUser(Long id);
+    void deleteUser(String id);
+
+    User detail(String id);
 
 }

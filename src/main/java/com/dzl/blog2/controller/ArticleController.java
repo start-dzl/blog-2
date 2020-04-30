@@ -1,17 +1,16 @@
 package com.dzl.blog2.controller;
 
 import com.dzl.blog2.dto.article.ArticleInput;
+import com.dzl.blog2.dto.article.ArticleSearchInput;
+import com.dzl.blog2.dto.page.PageBody;
 import com.dzl.blog2.exception.ResultBody;
 import com.dzl.blog2.model.ArticlePlus;
 import com.dzl.blog2.service.IArticleService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 
 /**
  * <p>
@@ -28,15 +27,34 @@ public class ArticleController {
     private IArticleService iArticleService;
 
     @ApiOperation(value = "生成文章")
-    @GetMapping("/create")
-    public ResultBody Create(@Valid ArticleInput input) {
-        Long id = iArticleService.createArticle(input).getId();
-        return ResultBody.success(id.toString());
+    @PostMapping("/create")
+    public ResultBody Create(@RequestBody ArticleInput input) {
+        String id = iArticleService.createArticle(input).getId();
+        return ResultBody.success(id);
+    }
+
+    @ApiOperation(value = "文章详情")
+    @GetMapping("/{id}")
+    public ArticlePlus detail(@PathVariable String id) {
+        return iArticleService.detail(id);
     }
 
     @ApiOperation(value = "文章列表")
     @GetMapping("/list")
-    public List<ArticlePlus> list() {
-        return iArticleService.findAll();
+    public PageBody<ArticlePlus> list(@Valid ArticleSearchInput input) {
+        return iArticleService.findAll(input);
+    }
+
+    @ApiOperation(value = "修改文章")
+    @PutMapping("/change/{id}")
+    public ResultBody change(@PathVariable Long id, @RequestBody ArticleInput input) {
+        return ResultBody.success(iArticleService.changeArticle(id, input));
+    }
+
+    @ApiOperation(value = "删除文章")
+    @DeleteMapping("/delete/{id}")
+    public ResultBody delete(@PathVariable Long id) {
+        iArticleService.deleteArticle(id);
+        return ResultBody.success();
     }
 }

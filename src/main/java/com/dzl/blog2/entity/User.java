@@ -1,6 +1,10 @@
 package com.dzl.blog2.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
+import com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler;
+import com.dzl.blog2.enums.Role;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -18,6 +22,7 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Accessors(chain = true)
+@TableName(autoResultMap = true)
 public class User extends Model<User> {
 
     private static final long serialVersionUID = 1L;
@@ -35,5 +40,6 @@ public class User extends Model<User> {
 
     private String phone;
 
-
+    @TableField(typeHandler = JacksonTypeHandler.class)
+    private Role[] roles;
 }
