@@ -30,6 +30,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
 
     @Autowired
     private ITagService iTagService;
+
     @Autowired
     private IArticleTagService iArticleTagService;
 
@@ -105,19 +106,19 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
     }
 
     private void createArticleTag(Article article, List<Tag> tags) {
-        for (int i = 0; i < tags.size(); i++) {
+        for (Tag tag : tags) {
             ArticleTag articleTag = new ArticleTag();
             articleTag.setArticleId(article.getId());
-            articleTag.setTagId(tags.get(i).getId());
+            articleTag.setTagId(tag.getId());
             articleTag.insert();
         }
     }
 
     @Override
     public PageBody<ArticlePlus> findAll(ArticleSearchInput input) {
-        IPage<ArticlePlus> page = new Page(input.getCurrent(), input.getSize());
+        IPage<ArticlePlus> page = new Page<>(input.getCurrent(), input.getSize());
         List<ArticlePlus> allArticle = getBaseMapper().findAllArticle(input.getKeyWord(), page);
-        return new PageBody(page, allArticle);
+        return new PageBody<>(page, allArticle);
     }
 
     @Override
