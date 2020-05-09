@@ -5,6 +5,10 @@ spring:
     username: root
     password: 1234
     type: com.alibaba.druid.pool.DruidDataSource
+  thymeleaf:
+    cache: false
+    mode: LEGACYHTML5
+  profile: classpath:/templates/
 
 mybatis-plus:
   type-enums-package: com.dzl.blog2.enums

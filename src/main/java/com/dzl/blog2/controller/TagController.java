@@ -25,7 +25,7 @@ public class TagController {
 
     @ApiOperation(value = "修改标签")
     @PutMapping("/change/{id}")
-    public Tag change(@PathVariable Long id, @RequestParam String name) {
+    public Tag change(@PathVariable String id, @RequestParam String name) {
 
         return iTagService.changeTag(id, name);
     }
@@ -39,7 +39,7 @@ public class TagController {
 
     @ApiOperation(value = "删除标签")
     @DeleteMapping("/delete/{id}")
-    public ResultBody delete(@PathVariable Long id) {
+    public ResultBody delete(@PathVariable String id) {
         iTagService.deleteTag(id);
         return ResultBody.success();
     }
