@@ -8,14 +8,12 @@ import com.dzl.blog2.enums.Role;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDateTime;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+
+/*import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;*/
 
 /**
  * <p>
@@ -29,7 +27,7 @@ import java.util.Set;
 @Data
 @Accessors(chain = true)
 @TableName(autoResultMap = true)
-public class User extends Model<User> implements UserDetails {
+public class User extends Model<User> {
 
     private static final long serialVersionUID = 1L;
     private String id;
@@ -49,7 +47,7 @@ public class User extends Model<User> implements UserDetails {
     @TableField(typeHandler = JacksonTypeHandler.class)
     private Role[] roles;
 
-    @Override
+  /*  @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Set<GrantedAuthority> set = new HashSet<>();
         for (Role role : roles) {
@@ -81,5 +79,5 @@ public class User extends Model<User> implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
-    }
+    }*/
 }

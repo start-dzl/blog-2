@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>分类页</title>
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <meta content="no-siteapp" http-equiv="Cache-Control"/>
+    <meta content="个人学习测试网站" name="keywords">
+    <meta content="dzl" name="description">
+    <link href="css/all.css" rel="stylesheet">
+    <link href="css/app.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/plugs_paging.css" rel="stylesheet">
+    <script src="https://lib.baomitu.com/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://lib.baomitu.com/amazeui/2.7.2/js/amazeui.min.js"></script>
+    <link href="https://lib.baomitu.com/amazeui/2.7.2/css/amazeui.min.css" rel="stylesheet">
+</head>
+<body>
+<div id="app">
+
+    <div th:replace="header :: header"></div>
+    <div class="mui-content">
+        <div>
+            <div class="am-container ">
+                <div class="am-g">
+                    <div class="am-u-sm-12 am-u-lg-12">
+                        <section class="archives-wrap">
+                            <h1 class="">
+                                gis
+                            </h1>
+                            <div class="archives">
+                                <article class="archive-article ">
+                                    <div>
+                                        <header>
+                                            <div class="article-meta">
+                                                <a class="archive-article-date">
+                                                    <time itemprop="datePublished">09-18</time>
+                                                </a>
+                                            </div>
+                                            <h1>
+                                                <a class="article-title" target="_blank">&nbsp;</a>
+                                            </h1>
+                                            <div class="article-info info-on-archive">
+                                                <div class="article-category tagcloud">
+                                                    <ul class="article-tag-list">
+                                                        <li class="article-tag-list-item"><a
+                                                                class="article-tag-list-link color0 color6 color3">&nbsp;</a>
+                                                        </li>
+                                                        <li class="article-tag-list-item"><a
+                                                                class="article-tag-list-link color0 color6 color3">&nbsp;</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </header>
+                                    </div>
+                                </article>
+                            </div>
+                        </section>
+
+                    </div>
+                </div>
+            </div>
+            <div class="my-row" id="page-father">
+                <div id="pagination">
+                    <ul class="am-pagination  am-pagination-centered">
+                        <li class="am-disabled"><a href="#">&laquo; 上一页</a></li>
+                        <li class="am-active"><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li>
+                        <li><a href="#">下一页 &raquo;</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+
+    <div th:replace="footer :: footer"></div>
+</div>
+<script src="js/categories.js"></script>
+<script src="js/plugs_paging.js"></script>
+<script src="js/all.js"></script>
+</body>
+</html>

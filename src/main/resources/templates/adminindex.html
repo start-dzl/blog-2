@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html class="no-js fixed-layout" lang="en" xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="utf-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <title>管理页</title>
+    <meta content="这是一个 index 页面" name="description">
+    <meta content="index" name="keywords">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <meta content="webkit" name="renderer">
+    <meta content="no-siteapp" http-equiv="Cache-Control"/>
+
+    <meta content="Amaze UI" name="apple-mobile-web-app-title"/>
+    <link href="css/amazeui.min.css" rel="stylesheet"/>
+    <link href="css/admin.css" rel="stylesheet">
+    <link href="css/all.css" rel="stylesheet">
+    <link href="css/superadmin.css" rel="stylesheet">
+    <link href="css/plugs_paging.css" rel="stylesheet">
+    <script src="https://lib.baomitu.com/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://lib.baomitu.com/amazeui/2.7.2/js/amazeui.min.js"></script>
+    <script src="https://lib.baomitu.com/underscore.js/1.9.1/underscore-min.js"></script>
+</head>
+<body>
+
+<div th:replace="header :: header"></div>
+<div class="am-cf admin-main" style="padding-top: 0">
+    <!-- sidebar start -->
+    <div class="admin-sidebar am-offcanvas" id="admin-offcanvas">
+        <div class="am-offcanvas-bar admin-offcanvas-bar AdminIndexList">
+            <ul class="am-list admin-sidebar-list">
+                <li class="AdminIndexClick statistics"><a><span class="am-icon-home"></span> 首页</a></li>
+                <li class="admin-parent">
+                    <a class="am-cf" data-am-collapse="{target: '#collapse-nav'}"><span class="am-icon-file"></span> 文章
+                        <span class="am-icon-angle-right am-fr am-margin-right"></span></a>
+                    <ul class="am-list am-collapse admin-sidebar-sub am-in" id="collapse-nav">
+                        <li class="AdminIndexClick articleManagement"><a class="am-cf"><span
+                                class="am-icon-check"></span> 文章管理<span
+                                class="am-icon-star am-fr am-margin-right admin-icon-yellow"></span></a></li>
+                        <li><a href="admin-help.html"><span class="am-icon-puzzle-piece"></span> 帮助页</a></li>
+                        <li><a href="admin-gallery.html"><span class="am-icon-th"></span> 相册页面<span
+                                class="am-badge am-badge-secondary am-margin-right am-fr">24</span></a></li>
+                        <li><a href="admin-log.html"><span class="am-icon-calendar"></span> 系统日志</a></li>
+                        <li><a href="admin-404.html"><span class="am-icon-bug"></span> 404</a></li>
+                    </ul>
+                </li>
+                <li><a href="admin-table.html"><span class="am-icon-table"></span> 表格</a></li>
+                <li><a href="admin-form.html"><span class="am-icon-pencil-square-o"></span> 表单</a></li>
+                <li><a href="#"><span class="am-icon-sign-out"></span> 注销</a></li>
+            </ul>
+
+            <div class="am-panel am-panel-default admin-sidebar-panel">
+                <div class="am-panel-bd">
+                    <p><span class="am-icon-bookmark"></span> 公告</p>
+                    <p>时光静好，与君语；细水流年，与君同。—— Amaze UI</p>
+                </div>
+            </div>
+
+            <div class="am-panel am-panel-default admin-sidebar-panel">
+                <div class="am-panel-bd">
+                    <p><span class="am-icon-tag"></span> wiki</p>
+                    <p>Welcome to the Amaze UI wiki!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- sidebar end -->
+
+    <!-- content start -->
+    <div class="admin-content">
+        <div class="admin-content-body " id="statistics">
+            <div class="am-cf am-padding">
+                <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">首页</strong> /
+                    <small>浏览信息</small>
+                </div>
+            </div>
+
+            <ul class="am-avg-sm-1 am-avg-md-4 am-margin am-padding am-text-center admin-content-list ">
+                <li><a class="am-text-success" href="#"><span
+                        class="am-icon-btn am-icon-file-text"></span><br/>总访问量<br/><span class="allVisitor">2300</span></a>
+                </li>
+                <li><a class="am-text-warning" href="#"><span
+                        class="am-icon-btn am-icon-briefcase"></span><br/>用户数量<br/><span class="allUser">2300</span></a>
+                </li>
+                <li><a class="am-text-danger" href="#"><span
+                        class="am-icon-btn am-icon-recycle"></span><br/>文章数<br/><span class="articleNum">2300</span></a>
+                </li>
+                <li><a class="am-text-secondary" href="#"><span class="am-icon-btn am-icon-user-md"></span><br/>留言<br/>2300</a>
+                </li>
+            </ul>
+
+        </div>
+        <div class="admin-content-body superFunction" id="articleManagement">
+            <div class="am-cf am-padding">
+                <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">文章</strong> /
+                    <small>文章管理</small>
+                </div>
+            </div>
+            <table class="am-table">
+                <thead>
+                <tr>
+                    <th>文章标题</th>
+                    <th>发布时间</th>
+                    <th>文章分类</th>
+                    <th>浏览量</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody class="articleManagementTable">
+
+                </tbody>
+            </table>
+
+        </div>
+
+
+    </div>
+    <!-- content end -->
+
+    <!--删除文章模态框-->
+    <div class="am-modal am-modal-confirm" id="deleteAlter" tabindex="-1">
+        <div class="am-modal-dialog">
+            <div class="am-modal-hd">删除文章</div>
+            <div class="am-modal-bd">
+                你确定要删除吗？删除了就无法恢复了呦!
+            </div>
+            <div class="am-modal-footer">
+                <span class="am-modal-btn" data-am-modal-cancel>取消</span>
+                <span class="sureArticleDeleteBtn am-modal-btn" data-am-modal-confirm>确定</span>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+<a class="am-icon-btn am-icon-th-list am-show-sm-only admin-menu" data-am-offcanvas="{target: '#admin-offcanvas'}"
+   href="#"></a>
+<script src="js/adminIndex.js"></script>
+<script src="js/plugs_paging.js"></script>
+<script src="js/all.js"></script>
+</body>
+</html>

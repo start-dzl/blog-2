@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${articleTitle}"></title>
+    <meta name="description" th:content="${articleTabloid}">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <meta content="no-siteapp" http-equiv="Cache-Control"/>
+    <meta content="博客,个人,学习,IT,生活" name="keywords">
+
+    <link href="css/editormd/editormd.preview.min.css" rel="stylesheet"/>
+    <link href="https://lib.baomitu.com/amazeui/2.7.2/css/amazeui.min.css" rel="stylesheet">
+    <link href="css/all.css" rel="stylesheet">
+    <link href="css/editormd/editormd.min.css" rel="stylesheet"/>
+    <link href="css/show.css" rel="stylesheet">
+    <link href="css/comment.css" rel="stylesheet">
+    <link href="https://lib.baomitu.com/font-awesome/5.8.0/css/fontawesome.min.css" rel="stylesheet">
+    <link href="css/share.min.css" rel="stylesheet">
+    <link href="https://lib.baomitu.com/lightgallery/1.6.12/css/lightgallery.min.css" rel="stylesheet">
+    <link href="css/app.css" rel="stylesheet">
+    <script src="https://lib.baomitu.com/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://lib.baomitu.com/underscore.js/1.9.1/underscore-min.js"></script>
+    <script src="https://lib.baomitu.com/modernizr/2010.07.06dev/modernizr.min.js"></script>
+    <script src="https://lib.baomitu.com/amazeui/2.7.2/js/amazeui.ie8polyfill.min.js"></script>
+    <script src="https://lib.baomitu.com/amazeui/2.7.2/js/amazeui.min.js"></script>
+    <script charset="utf-8" src="js/editormd/editormd.js"></script>
+    <script src="lib/marked.min.js"></script>
+    <script src="https://lib.baomitu.com/prettify/r298/prettify.min.js"></script>
+    <script src="https://lib.baomitu.com/raphael/2.2.7/raphael.min.js"></script>
+
+    <script src="https://lib.baomitu.com/js-sequence-diagrams/1.0.6/sequence-diagram-min.js"></script>
+    <script src="https://lib.baomitu.com/flowchart/1.11.3/flowchart.min.js"></script>
+    <script src="js/lightgallery/lightgallery.js"></script>
+
+</head>
+<body>
+<div th:replace="header :: header"></div>
+<div id="main">
+    <div class="am-container">
+        <div class="am-g">
+            <div class="am-u-sm-12 am-u-lg-12">
+                <div class="content">
+                    <div class="article">
+                        <div class="blog-article-top">
+                            <div style="height: 500px">
+
+                            </div>
+                        </div>
+                        <div class="article-content">
+                            <div id="wordsView">
+                                <textarea id="mdText" name="editormd-markdown-doc" style="display:none;"></textarea>
+                            </div>
+                        </div>
+                        <div class="blog-article-footer">
+                        </div>
+                        <div class="other">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--引入共有底部-->
+<div th:replace="footer :: footer"></div>
+
+<script src="js/all.js"></script>
+<script src="js/show.js"></script>
+<!--放大图片插件-->
+<script src="js/lightgallery/picturefill.min.js"></script>
+<script src="js/lightgallery/lg-pager.js"></script>
+<script src="js/lightgallery/lg-autoplay.js"></script>
+<script src="js/lightgallery/lg-fullscreen.js"></script>
+<script src="js/lightgallery/lg-zoom.js"></script>
+<!--分享功能插件-->
+<link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+<script src="https://cdn.bootcss.com/social-share.js/1.0.16/js/social-share.min.js"></script>
+</body>
+</html>

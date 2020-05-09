@@ -16,9 +16,9 @@ import java.util.List;
 public interface ITagService extends IService<Tag> {
     Tag createTag(String name);
 
-    void deleteTag(Long id);
+    void deleteTag(String id);
 
-    Tag changeTag(Long id, String name);
+    Tag changeTag(String id, String name);
 
     List<Tag> findByName(String name);
 

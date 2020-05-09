@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>登录页</title>
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <meta content="no-siteapp" http-equiv="Cache-Control"/>
+    <meta content="博客,个人,学习,IT" name="keywords">
+    <meta content="dzl" name="description">
+    <link href="https://lib.baomitu.com/amazeui/2.7.2/css/amazeui.min.css" rel="stylesheet">
+    <link href="https://lib.baomitu.com/font-awesome/5.8.0/css/fontawesome.min.css" rel="stylesheet">
+    <script src="https://lib.baomitu.com/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://lib.baomitu.com/underscore.js/1.9.1/underscore-min.js"></script>
+    <script src="https://lib.baomitu.com/amazeui/2.7.2/js/amazeui.min.js"></script>
+    <link href="css/all.css" rel="stylesheet">
+    <link href="css/app.css" rel="stylesheet">
+    <link href="css/login.css" rel="stylesheet">
+
+</head>
+<body>
+<div id="app">
+    <div th:replace="header :: header"></div>
+    <div id="main">
+        <div id="am-container" style="margin:10px">
+            <div class="am-g">
+
+                <div class="am-u-lg-6 am-u-sm-9 am-u-sm-centered">
+                    <div>
+                        <img class="blog-entry-img"
+                             src="https://dengzlcos-1253188131.cos.ap-shanghai.myqcloud.com/img/xg.png"/>
+                    </div>
+                    <div>
+                        <form class="am-form am-form-horizontal" method="post" th:action="@{/login}">
+                            <div class="loginInput am-input-group am-u-lg-10 col-md-offset-2 am-form-icon am-form-feedback "
+                                 style="margin-left: 0">
+                                <label class=" am-form-label">电话</label>
+                                <input class=" am-round" id="phone" name="username" placeholder="客官，这里输入手机号哦"
+                                       type="text">
+                                <span class="icons am-icon-warning" id="phone_null" style="color: orange"></span>
+                                <span class="icons am-icon-times" id="phone_error" style="color: red"></span>
+                            </div>
+                            <br>
+                            <div class="loginInput am-input-group am-u-lg-10 col-md-offset-2 am-form-icon am-form-feedback"
+                                 style="margin-left: 0">
+                                <label class=" am-form-label ">密码</label>
+                                <input class="am-round" id="password" name="password" placeholder="嘘，在这里悄悄输入密码"
+                                       type="password">
+                                <span class="icons am-icon-warning" id="password_null" style="color: orange"></span>
+                            </div>
+                            <br/>
+                            <div class="am-u-lg-10 col-md-offset-2">
+                                <label class="rememberMe" for="remember-me">
+                                    <input id="remember-me" type="checkbox">
+                                    记住密码
+                                </label>
+                            </div>
+                            <br>
+                            <div class="am-input-group am-u-lg-10 col-md-offset-2" style="margin-left: 0">
+                                <input class="am-btn am-btn-primary am-btn-sm am-fl" id="loginFormSubmit"
+                                       style="border-radius: 5px" type="submit" value="登 录">
+                                <!-- 按钮触发模态框 -->
+                                <button class="am-btn am-btn-default am-btn-sm am-fr "
+                                        data-am-modal="{target: '#my-alert'}" style="border-radius: 5px" type="button">
+                                    忘记密码
+                                </button>
+                            </div>
+                            <div class="login_error" th:if="${param.error}">
+                                <span class="am-alert am-alert-secondary" data-am-alert
+                                      style="margin-left: 15%;background-color: #d85a37;color: white;border-radius: 5px">用户名不存在或密码错误!</span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+
+    <div th:replace="footer :: footer"></div>
+</div>
+
+<script src="js/login.js"></script>
+<script src="js/all.js"></script>
+</body>
+</html>
