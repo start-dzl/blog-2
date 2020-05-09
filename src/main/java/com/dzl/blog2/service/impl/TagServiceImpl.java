@@ -37,12 +37,12 @@ public class TagServiceImpl extends ServiceImpl<TagMapper, Tag> implements ITagS
     }
 
     @Override
-    public void deleteTag(String id) {
+    public void deleteTag(Long id) {
         getBaseMapper().deleteById(id);
     }
 
     @Override
-    public Tag changeTag(String id, String name) {
+    public Tag changeTag(Long id, String name) {
         List<Tag> tags = getBaseMapper().selectList(new QueryWrapper<Tag>().lambda().eq(Tag::getName, name));
         if (tags.size() > 0) {
             throw new BizException("-1", "修改后的标签已经存在");

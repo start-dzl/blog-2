@@ -35,4 +35,9 @@ public class Article extends Model<Article> {
 
     private Long playCount;
 
+/*    private String idStr;
+
+    public String getIdStr() {
+        return id.toString();
+    }*/
 }

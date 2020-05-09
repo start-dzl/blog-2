@@ -45,15 +45,6 @@ public class ArticleController {
         return iArticleService.findAll(input);
     }
 
-    @ApiOperation(value = "文章列表")
-    @GetMapping("/lists")
-    public PageBody<ArticlePlus> ats() {
-        ArticleSearchInput articleSearchInput = new ArticleSearchInput();
-        articleSearchInput.setCurrent(1);
-        articleSearchInput.setSize(3);
-        return iArticleService.findAll(articleSearchInput);
-    }
-
     @ApiOperation(value = "修改文章")
     @PutMapping("/change/{id}")
     public ResultBody change(@PathVariable Long id, @RequestBody ArticleInput input) {

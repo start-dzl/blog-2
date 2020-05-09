@@ -36,13 +36,7 @@ CREATE TABLE tag
   name VARCHAR(60) NULL DEFAULT NULL COMMENT '标签名',
   PRIMARY KEY (id)
 );
-
-create table article_tag
-(
-  article_id bigint not null,
-  tag_id     bigint null,
-  constraint FK_article_id
-    foreign key (article_id) references article (id),
-  constraint FK_tag_id
-    foreign key (tag_id) references tag (id)
-);
+alter table mbp.article_tag
+  add constraint FK_article_id foreign key (article_id) references article (ID);
+alter table mbp.article_tag
+  add constraint FK_tag_id foreign key (tag_id) references tag (ID);
