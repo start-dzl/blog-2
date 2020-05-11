@@ -14,9 +14,9 @@ function putInHotArticle(data) {
 function putTagClud(data) {
 
     var TagCloud = $('#IndexTagCloud')
-    $.each(data['result'], function (index, obj) {
+    $.each(data, function (index, obj) {
         var center = $(
-            ' <a href="/tags?tag=' + obj['tagName'] + '" class="blog-tag">' + obj['tagName'] + '</a>'
+            ' <a href="/tags?tag=' + obj['name'] + '" class="blog-tag">' + obj['name'] + '</a>'
         )
         TagCloud.append(center);
     })
@@ -123,10 +123,10 @@ function ajaxTag() {
     $.ajax(
         {
             type: 'get',
-            url: '/GetTagCloud',
+            url: '/tag/list/all',
             DataType: 'json',
             data: {}, success: function (data) {
-                if (data['result'].length == 0) {
+                if (data.length == 0) {
                     var tagCloud = $('#IndexTagCloud');
                     tagCloud.empty();
                     var widgetTagCloud = $('<div class="widget-tag-cloud"><span>暂无标签</span></div>');
@@ -142,11 +142,23 @@ function ajaxTag() {
     )
 }
 
-function localRefresh() {
-    $('#table_refresh').load("/refresh");
+function localRefresh(currentPage, pageSize, isFirst) {
+    if (!isFirst) {
+        $('#table_refresh').load("/refresh/article?current=" + currentPage + "&size=" + pageSize);
+    }
+    getPageDetail();
+    //分页
+    $("#pagination").paging({
+        rows: size,//每页显示条数
+        pageNum: currentPage,//当前所在页码
+        pages: page,//总页数
+        total: total,//总记录数
+        callback: function (currentPage, pageSize, haveSecond) {
+            localRefresh(currentPage, pageSize, haveSecond);
+        }
+    });
+
+
 }
-
-
-ajaxHotArt();
 ajaxTag();
-ajaxFirst(1);
+localRefresh(1, 5, true);

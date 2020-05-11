@@ -1,6 +1,7 @@
 package com.dzl.blog2.controller;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.dzl.blog2.entity.Tag;
 import com.dzl.blog2.exception.ResultBody;
 import com.dzl.blog2.service.ITagService;
@@ -17,7 +18,7 @@ public class TagController {
     private ITagService iTagService;
 
     @ApiOperation(value = "生成标签")
-    @GetMapping("/create")
+    @PostMapping("/create")
     public Tag Create(@RequestParam String name) {
 
         return iTagService.createTag(name);
@@ -30,12 +31,20 @@ public class TagController {
         return iTagService.changeTag(id, name);
     }
 
-    @ApiOperation(value = "修改标签")
+    @ApiOperation(value = "查找标签")
     @GetMapping("/list")
     public List<Tag> findList(@RequestParam String name) {
 
         return iTagService.findByName(name);
     }
+
+    @ApiOperation(value = "所有标签")
+    @GetMapping("/list/all")
+    public List<Tag> findAll() {
+
+        return iTagService.getBaseMapper().selectList(new QueryWrapper<Tag>());
+    }
+
 
     @ApiOperation(value = "删除标签")
     @DeleteMapping("/delete/{id}")

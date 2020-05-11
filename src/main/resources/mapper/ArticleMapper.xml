@@ -6,14 +6,14 @@
         <id column="id" property="id"/>
         <result column="title" property="title"/>
         <result column="author" property="author"/>
-        <result column="publishDate" property="publishDate"/>
-        <result column="updateDate" property="updateDate"/>
-        <result column="articleContent" property="articleContent"/>
-        <result column="articleTabloid" property="articleTabloid"/>
-        <result column="lastArticleId" property="lastArticleId"/>
-        <result column="nextArticleId" property="nextArticleId"/>
+        <result column="publish_date" property="publishDate"/>
+        <result column="update_date" property="updateDate"/>
+        <result column="article_content" property="articleContent"/>
+        <result column="article_tabloid" property="articleTabloid"/>
+        <result column="last_article_id" property="lastArticleId"/>
+        <result column="next_article_id" property="nextArticleId"/>
         <result column="likes" property="likes"/>
-        <result column="playCount" property="playCount"/>
+        <result column="play_count" property="playCount"/>
         <collection property="tags" ofType="com.dzl.blog2.entity.Tag" columnPrefix="t_">
             <id column="id" property="id"/>
             <result column="name" property="name"/>
@@ -30,16 +30,16 @@
 
     <select id="findAllArticle" resultMap="ArticlePlus">
         select a.id,
-        title,
-        author,
-        publish_date,
-        update_date,
-        article_content,
-        article_tabloid,
-        last_article_id,
-        next_article_id,
-        likes,
-        play_count,
+        a.title,
+        a.author,
+        a.publish_date,
+        a.update_date,
+        a.article_content,
+        a.article_tabloid,
+        a.last_article_id,
+        a.next_article_id,
+        a.likes,
+        a.play_count,
         t.id as t_id,
         t.name as t_name
         from article a

@@ -19,8 +19,6 @@
     <script src="https://lib.baomitu.com/underscore.js/1.9.1/underscore-min.js"></script>
     <script src="js/lastUrl.js"></script>
     <script src="https://lib.baomitu.com/amazeui/2.7.2/js/amazeui.min.js"></script>
-
-
 </head>
 <body>
 <div id="app">
@@ -95,28 +93,34 @@
                     <div><a class="bg-myStory-a">文章</a></div>
                 </h1>
             </div>
-            <div id="table_refresh" th:each="item : ${pages.getContent()}">
-                <div class="am-slider-desc">
-                    <header class="article-header">
-                        <h1 itemprop="name">
-                            <a href="" target="_blank" th:text="${{item.title}}"> </a>
-                        </h1>
-                        <div class="article-allta">
-                            <div class="article-tag tagcloud">
-                                <ul class="article-tag-list article-allta">
-                                    <div th:each="itag : ${item.getTags()}">
-                                        <a class="article-tag-list-link color0 color6 color3" href=""
-                                           th:text="${{itag.getName()}}"></a>
-                                    </div>
-                                </ul>
+            <div id="table_refresh" th:fragment="table_refresh">
+                <input id="staff_size" th:value="${pages.getSize()}" type="hidden"/>
+                <input id="staff_total" th:value="${pages.getTotal()}" type="hidden"/>
+                <input id="staff_page" th:value="${pages.getPage()}" type="hidden"/>
+                <input id="staff_current" th:value="${pages.getCurrent()}" type="hidden"/>
+                <div th:each="item : ${pages.getContent()}">
+                    <div class="am-slider-desc">
+                        <header class="article-header">
+                            <h1 itemprop="name">
+                                <a href="" target="_blank" th:text="${{item.getTitle()}}"> </a>
+                            </h1>
+                            <div class="article-allta">
+                                <div class="article-tag tagcloud">
+                                    <ul class="article-tag-list article-allta">
+                                        <div th:each="itag : ${item.getTags()}">
+                                            <a class="article-tag-list-link color0 color6 color3" href=""
+                                               th:text="${{itag.getName()}}"></a>
+                                        </div>
+                                    </ul>
+                                </div>
                             </div>
+                        </header>
+                        <div class="article-entry" th:text="${{item.getArticleContent()}}">
                         </div>
-                    </header>
-                    <div class="article-entry" th:text="${{item.articleContent}}">
-                    </div>
-                    <div class="read-all">
-                        <a href="" target="_blank">阅读全文 <i class="am-icon-angle-double-right"></i></a>
-                        <hr class="style-two">
+                        <div class="read-all">
+                            <a href="" target="_blank">阅读全文 <i class="am-icon-angle-double-right"></i></a>
+                            <hr class="style-two">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -134,20 +138,14 @@
                 </div>
             </div>
         </div>
-
-        <div>
-            <span style="margin:0 auto;font-size: 26px">刷新</span>
-            <button onClick="localRefresh()">点击刷新表格</button>
-        </div>
     </div>
 
     <div class="clear"></div>
     <!--引入共有底部-->
     <div th:replace="footer :: footer"></div>
 </div>
-
-<script src="js/index.js"></script>
 <script src="js/all.js"></script>
 <script src="js/plugs_paging.js"></script>
+<script src="js/index.js"></script>
 </body>
 </html>

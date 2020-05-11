@@ -8,8 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.validation.Valid;
 
 @Controller
 public class FrontendController {
@@ -18,14 +19,19 @@ public class FrontendController {
     private IArticleService iArticleService;
 
     @GetMapping("/")
-    public String index() {
+    public String index(Model model) {
+        ArticleSearchInput articleSearchInput = new ArticleSearchInput();
+        articleSearchInput.setCurrent(1);
+        articleSearchInput.setSize(5);
+        PageBody<ArticlePlus> all = iArticleService.findAll(articleSearchInput);
+        model.addAttribute("pages", all);
         return "index";
     }
 
     /**
      * @return 查询全部信息
      */
-    @RequestMapping("/list")
+    @GetMapping("/list")
     public ModelAndView itemsList() {
         ArticleSearchInput articleSearchInput = new ArticleSearchInput();
         articleSearchInput.setCurrent(1);
@@ -39,25 +45,9 @@ public class FrontendController {
     /**
      * @return 查询全部信息
      */
-    @RequestMapping("/index")
-    public String itemsList2(Model model) {
-        ArticleSearchInput articleSearchInput = new ArticleSearchInput();
-        articleSearchInput.setCurrent(1);
-        articleSearchInput.setSize(5);
-        PageBody<ArticlePlus> all = iArticleService.findAll(articleSearchInput);
-        model.addAttribute("pages", all);
-        return "index";
-    }
-
-    /**
-     * @return 查询全部信息
-     */
-    @RequestMapping("/refresh")
-    public String refresh(Model model) {
-        ArticleSearchInput articleSearchInput = new ArticleSearchInput();
-        articleSearchInput.setCurrent(2);
-        articleSearchInput.setSize(5);
-        PageBody<ArticlePlus> all = iArticleService.findAll(articleSearchInput);
+    @GetMapping("/refresh/article")
+    public String refresh(Model model, @Valid ArticleSearchInput input) {
+        PageBody<ArticlePlus> all = iArticleService.findAll(input);
         model.addAttribute("pages", all);
         return "index::table_refresh";
     }

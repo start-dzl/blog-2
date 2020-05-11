@@ -29,6 +29,7 @@
             var pages = me.options.pages;
             var total = me.options.total;
             var flag = me.options.flag;
+            pages = Number(pages);
             content += "<ul class=\"page am-pagination  am-pagination-centered\">";
             //总页数大于4时候
             if (flag == 0) {
@@ -112,6 +113,7 @@
                     if (current != 1) {
                         content += "<li><a id='prePage'>&laquo; 上一页</a></li>";
                     }
+
                     for (var i = 1; i < pages + 1; i++) {
                         if (current == i) {
                             content += "<li class=\"am-active\"><a>" + i + "</a></li>";
@@ -152,7 +154,7 @@
                 }
                 me.creatHtml();
                 if (me.options.callback) {
-                    me.options.callback(me.options.pageNum);
+                    me.options.callback(me.options.pageNum, me.options.rows, false);
                 }
             });
         }
@@ -162,3 +164,15 @@
         return new Paging($(this), options);
     }
 })(jQuery, window, document);
+
+var size;
+var total;
+var current;
+var page;
+
+function getPageDetail() {
+    size = $("#staff_size").val();
+    total = $("#staff_total").val();
+    current = $("#staff_current").val();
+    page = $("#staff_page").val();
+}
