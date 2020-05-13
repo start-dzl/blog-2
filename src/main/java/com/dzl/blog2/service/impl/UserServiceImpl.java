@@ -58,4 +58,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     public User detail(String id) {
         return getBaseMapper().selectById(id);
     }
+
+    @Override
+    public User findByName(String name) {
+        User user = new User().selectOne(new QueryWrapper<User>().lambda().eq(User::getPhone, name));
+        return user;
+    }
 }

@@ -5,9 +5,19 @@ spring:
     username: root
     password: 1234
     type: com.alibaba.druid.pool.DruidDataSource
+  redis:
+    host: 127.0.0.1
+    port: 6379
 
 mybatis-plus:
   type-enums-package: com.dzl.blog2.enums
+
+blog:
+  global:
+    secret: default
+    expire: 2592000
+    alreadySetup: true
+    mock: true
 
 
 # Logger Config
