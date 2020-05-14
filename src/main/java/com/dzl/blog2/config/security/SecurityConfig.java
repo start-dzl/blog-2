@@ -1,7 +1,5 @@
-package com.dzl.blog2;
+package com.dzl.blog2.config.security;
 
-import com.dzl.blog2.config.security.JwtAuthEntryPoint;
-import com.dzl.blog2.config.security.JwtAuthenticationFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

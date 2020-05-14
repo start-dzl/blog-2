@@ -22,5 +22,13 @@ blog:
 
 # Logger Config
 logging:
+  file:
+    max-size: 100MB
+    path: logs
   level:
-    com.dzl.blog2: debug
+    com.dzl.blog2: DEBUG
+    root: INFO
+  pattern:
+    file: '%date %5level [%thread] %mdc{Request-Id} %-30logger{30}: %m%n%xEx{full}'
+    console: '%gray(%date) %highlight(%5level) %green([%thread]) %magenta([%mdc{Request-Id}]) %cyan(%-30logger{30}): %m%n%xEx{full}'
+

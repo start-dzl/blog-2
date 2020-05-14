@@ -45,7 +45,7 @@ public class Swagger2Config {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("bolg Api")
+                .title("blog Api")
                 .description("")
                 .termsOfServiceUrl("")
                 .version("1.0")
