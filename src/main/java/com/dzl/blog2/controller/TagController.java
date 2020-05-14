@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/tag")
+@RequestMapping("/api/v0/tag")
 public class TagController {
     @Autowired
     private ITagService iTagService;

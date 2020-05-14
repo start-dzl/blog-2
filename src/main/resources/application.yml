@@ -5,6 +5,9 @@ spring:
     username: root
     password: 1234
     type: com.alibaba.druid.pool.DruidDataSource
+  redis:
+    host: 127.0.0.1
+    port: 6379
   thymeleaf:
     cache: false
     mode: LEGACYHTML5
@@ -13,8 +16,23 @@ spring:
 mybatis-plus:
   type-enums-package: com.dzl.blog2.enums
 
+blog:
+  global:
+    secret: default
+    expire: 2592000
+    alreadySetup: true
+    mock: true
+
 
 # Logger Config
 logging:
+  file:
+    max-size: 100MB
+    path: logs
   level:
-    com.dzl.blog2: debug
+    com.dzl.blog2: DEBUG
+    root: INFO
+  pattern:
+    file: '%date %5level [%thread] %mdc{Request-Id} %-30logger{30}: %m%n%xEx{full}'
+    console: '%gray(%date) %highlight(%5level) %green([%thread]) %magenta([%mdc{Request-Id}]) %cyan(%-30logger{30}): %m%n%xEx{full}'
+

@@ -15,13 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 public class GlobalExceptionHandler {
     private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
-    /**
-     * 处理自定义的业务异常
-     *
-     * @param req
-     * @param e
-     * @return
-     */
     @ExceptionHandler(value = BizException.class)
     @ResponseBody
     public ResultBody bizExceptionHandler(HttpServletRequest req, BizException e) {
@@ -29,13 +22,7 @@ public class GlobalExceptionHandler {
         return ResultBody.error(e.getErrorCode(), e.getErrorMsg());
     }
 
-    /**
-     * 处理空指针的异常
-     *
-     * @param req
-     * @param e
-     * @return
-     */
+
     @ExceptionHandler(value = NullPointerException.class)
     @ResponseBody
     public ResultBody exceptionHandler(HttpServletRequest req, NullPointerException e) {
@@ -43,14 +30,6 @@ public class GlobalExceptionHandler {
         return ResultBody.error(CommonEnum.BODY_NOT_MATCH);
     }
 
-
-    /**
-     * 处理其他异常
-     *
-     * @param req
-     * @param e
-     * @return
-     */
     @ExceptionHandler(value = Exception.class)
     @ResponseBody
     public ResultBody exceptionHandler(HttpServletRequest req, Exception e) {

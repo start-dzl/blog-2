@@ -20,4 +20,5 @@ public interface IUserService extends IService<User> {
 
     User detail(String id);
 
+    User findByName(String name);
 }
