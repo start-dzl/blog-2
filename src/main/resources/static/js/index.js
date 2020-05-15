@@ -123,7 +123,7 @@ function ajaxTag() {
     $.ajax(
         {
             type: 'get',
-            url: '/tag/list/all',
+            url: '/api/v0/tag/list/all',
             DataType: 'json',
             data: {}, success: function (data) {
                 if (data.length == 0) {

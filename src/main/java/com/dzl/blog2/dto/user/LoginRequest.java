@@ -15,7 +15,7 @@ import javax.validation.constraints.NotBlank;
 @ApiModel(value = "LoginRequest", description = "登陆")
 public class LoginRequest {
     @NotBlank
-    private String username;
+    private String phoneName;
 
     @NotBlank
     private String password;

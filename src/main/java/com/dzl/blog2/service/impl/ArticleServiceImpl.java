@@ -123,6 +123,11 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
 
     @Override
     public ArticlePlus detail(String id) {
-        return getBaseMapper().findArticlePlusById(id);
+        ArticleMapper baseMapper = getBaseMapper();
+        ArticlePlus articlePlus = baseMapper.findArticlePlusById(id);
+        articlePlus.setPlayCount(articlePlus.getPlayCount() + 1);
+        articlePlus.insertOrUpdate();
+
+        return articlePlus;
     }
 }

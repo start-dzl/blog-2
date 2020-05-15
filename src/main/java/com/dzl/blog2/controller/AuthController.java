@@ -6,6 +6,7 @@ import com.dzl.blog2.dto.user.LoginRequest;
 import com.dzl.blog2.entity.User;
 import com.dzl.blog2.exception.BizException;
 import com.dzl.blog2.service.IUserService;
+import com.dzl.blog2.utils.MD5Util;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
@@ -44,16 +45,17 @@ public class AuthController {
     @ApiOperation(value = "登录")
     public JwtAuthenticationResponse sign(@Valid @RequestBody LoginRequest loginRequest) {
 
-        User admin = adminService.findByName(loginRequest.getUsername());
+        User admin = adminService.findByPhoneName(loginRequest.getPhoneName());
         if (admin == null) {
             throw new BizException("-1", "用户不存在");
         }
-      /*  if (!passwordEncoder.matches(loginRequest.getPassword(),existsAdmin.getPassword())){
-            throw new BadRequestException("账号或密码错误");
-        }*/
-        logger.info("login a admin whose username:{}", loginRequest.getUsername());
+        MD5Util md5Util = new MD5Util();
+        if (!(md5Util.encode(loginRequest.getPassword())).equals(admin.getPassword())) {
+            throw new BizException("-1", "账号或密码错误");
+        }
+        logger.info("login a admin whose PhoneName:{}", loginRequest.getPhoneName());
 
-        return new JwtAuthenticationResponse(tokenProvider.token(loginRequest.getUsername(), ADMIN));
+        return new JwtAuthenticationResponse(tokenProvider.token(loginRequest.getPhoneName(), ADMIN));
     }
 
 }

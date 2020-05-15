@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 
@@ -26,20 +25,6 @@ public class FrontendController {
         PageBody<ArticlePlus> all = iArticleService.findAll(articleSearchInput);
         model.addAttribute("pages", all);
         return "index";
-    }
-
-    /**
-     * @return 查询全部信息
-     */
-    @GetMapping("/list")
-    public ModelAndView itemsList() {
-        ArticleSearchInput articleSearchInput = new ArticleSearchInput();
-        articleSearchInput.setCurrent(1);
-        articleSearchInput.setSize(3);
-        PageBody<ArticlePlus> all = iArticleService.findAll(articleSearchInput);
-        ModelAndView mav = new ModelAndView("test");
-        mav.addObject("list", all.getContent());
-        return mav;
     }
 
     /**

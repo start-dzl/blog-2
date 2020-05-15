@@ -60,8 +60,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     }
 
     @Override
-    public User findByName(String name) {
-        User user = new User().selectOne(new QueryWrapper<User>().lambda().eq(User::getPhone, name));
+    public User findByPhoneName(String phoneName) {
+        User user = new User().selectOne(new QueryWrapper<User>().lambda().eq(User::getPhone, phoneName));
         return user;
     }
 }

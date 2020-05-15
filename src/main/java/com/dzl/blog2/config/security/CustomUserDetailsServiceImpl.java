@@ -27,8 +27,8 @@ public class CustomUserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        logger.debug("load a admin whose username:{}", s);
-        User phone = adminService.findByName(s);
+        logger.debug("load a admin whose PhoneName:{}", s);
+        User phone = adminService.findByPhoneName(s);
         if (phone == null) {
             throw new UsernameNotFoundException("Can't load the user: " + s);
         }
