@@ -36,4 +36,12 @@ public class FrontendController {
         model.addAttribute("pages", all);
         return "index::table_refresh";
     }
+
+    /**
+     * @return 查询全部信息
+     */
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
 }
