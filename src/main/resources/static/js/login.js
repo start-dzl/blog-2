@@ -37,7 +37,7 @@ loginFormSubmit.click(function () {
     var phone_value = phone.val();
     var pattren1 = /^1[345789]\d{9}$/;
     if (password_len !== 0 && phone_len !== 0 && pattren1.test(phone_value)) {
-        return true;
+        ajaxLogin()
     } else {
         if (phone_len === 0) {
             phone_null.show();
@@ -48,7 +48,6 @@ loginFormSubmit.click(function () {
         if (password_len === 0) {
             password_null.show();
         }
-        return false;
     }
 });
 password.focus(function () {
@@ -265,13 +264,20 @@ function ajaxLogin() {
         type: 'post',
         url: '/api/auth/sign',
         dataType: 'json',
-        data: {
-            phoneName: modal_phone.val(),
-            password: password
-        },
+        contentType: 'application/json',
+        data: JSON.stringify({
+            "phoneName": phone.val(),
+            "password": password.val()
+        }),
+        async: false,
         success: function (data) {
+            if (data["code"] == "-1") {
+                alert("异常");
+                return;
+            }
             localStorage["token"] = data["tokenType"] + " " + data["accessToken"];
             timeCount();
+            document.getElementById("fromLogin").submit()
         },
         error: function () {
             alert("异常")
