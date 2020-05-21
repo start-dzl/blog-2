@@ -31,7 +31,7 @@ public class ArticleController {
 
     @ApiOperation(value = "生成文章")
     @PostMapping("/create")
-    public ResultBody Create(@UserOrThrow User user, @RequestBody ArticleInput input) {
+    public ResultBody Create(@RequestBody ArticleInput input) {
         String id = iArticleService.createArticle(input).getId();
         return ResultBody.success(id);
     }
