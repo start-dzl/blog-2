@@ -15,6 +15,8 @@ public class ArticleInput {
 
     private String articleContent;
 
+    private String catalog;
+
     private List<String> tags;
 
     private PublishStatus publishStatus;

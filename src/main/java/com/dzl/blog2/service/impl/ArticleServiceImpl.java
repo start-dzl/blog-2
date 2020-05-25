@@ -16,6 +16,7 @@ import com.dzl.blog2.mapper.ArticleMapper;
 import com.dzl.blog2.model.ArticlePlus;
 import com.dzl.blog2.service.IArticleService;
 import com.dzl.blog2.service.IArticleTagService;
+import com.dzl.blog2.service.ICatalogService;
 import com.dzl.blog2.service.ITagService;
 import com.dzl.blog2.utils.BuildArticleTabloidUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,9 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
 
     @Autowired
     private IArticleTagService iArticleTagService;
+
+    @Autowired
+    private ICatalogService iCatalogService;
 
     @Override
     public Article createArticle(ArticleInput input) {

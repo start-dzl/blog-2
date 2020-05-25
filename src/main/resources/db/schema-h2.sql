@@ -63,3 +63,6 @@ create table catalog
   name varchar(60) null comment '分类名'
 );
 
+alter table article
+  add constraint FK_ID foreign key (catalog_id) REFERENCES catalog (id);
+
