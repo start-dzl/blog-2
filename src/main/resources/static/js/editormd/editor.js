@@ -107,7 +107,7 @@ function publishSuccessPutIn(data) {
     $('#removeDiv').append(sec);
 }
 
-//验证是否有权限写博客
+/*//验证是否有权限写博客
 $.ajax({
     type: "GET",
     url: "/canYouWrite",
@@ -128,9 +128,9 @@ $.ajax({
     },
     error: function () {
     }
-});
+});*/
 //获得草稿文章
-$.ajax({
+/*$.ajax({
     type: "GET",
     url: "/getDraftArticle",
     async: false,
@@ -164,7 +164,7 @@ $.ajax({
     },
     error: function () {
     }
-});
+});*/
 
 // 插入标签
 var addTagsBtn = $('.addTagsBtn');

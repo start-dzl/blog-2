@@ -1,5 +1,6 @@
 package com.dzl.blog2.dto.article;
 
+import com.dzl.blog2.enums.PublishStatus;
 import lombok.Data;
 
 
@@ -11,4 +12,6 @@ public class ArticleSearchInput {
     private Integer current;
 
     private Integer size;
+
+    private PublishStatus publishStatus;
 }

@@ -46,3 +46,20 @@ create table article_tag
   constraint FK_tag_id
     foreign key (tag_id) references tag (id)
 );
+
+alter table article
+  add column publish_status integer default 1;
+
+alter table article
+  add column copy_right integer default 0;
+
+alter table article
+  add column catalog_id bigint;
+
+create table catalog
+(
+  id   bigint      not null comment '主键ID'
+    primary key,
+  name varchar(60) null comment '分类名'
+);
+

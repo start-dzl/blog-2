@@ -1,5 +1,6 @@
 package com.dzl.blog2.dto.article;
 
+import com.dzl.blog2.enums.PublishStatus;
 import lombok.Data;
 
 import java.util.List;
@@ -15,4 +16,6 @@ public class ArticleInput {
     private String articleContent;
 
     private List<String> tags;
+
+    private PublishStatus publishStatus;
 }

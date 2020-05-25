@@ -14,6 +14,10 @@
         <result column="next_article_id" property="nextArticleId"/>
         <result column="likes" property="likes"/>
         <result column="play_count" property="playCount"/>
+        <result column="publish_status" property="publishStatus"/>
+        <result column="copy_right" property="copyRight"/>
+        <association property="catalog" column="catalog_id"
+                     select="com.dzl.blog2.mapper.CatalogMapper.selectById"/>
         <collection property="tags" ofType="com.dzl.blog2.entity.Tag" columnPrefix="t_">
             <id column="id" property="id"/>
             <result column="name" property="name"/>
@@ -40,6 +44,7 @@
         a.next_article_id,
         a.likes,
         a.play_count,
+        a.publish_status,
         t.id as t_id,
         t.name as t_name
         from article a
@@ -52,6 +57,7 @@
                 or author like concat(concat('%',#{key_word}),'%')
                 or t.name like concat(concat('%',#{key_word}),'%')
             </if>
+            and a.publish_status = #{publish_status}
         </where>
     </select>
 

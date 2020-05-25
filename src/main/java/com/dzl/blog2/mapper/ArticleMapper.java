@@ -20,7 +20,7 @@ public interface ArticleMapper extends BaseMapper<Article> {
 
     Article findLastArticle();
 
-    List<ArticlePlus> findAllArticle(@Param("key_word") String keyWord, IPage<ArticlePlus> myPage);
+    List<ArticlePlus> findAllArticle(@Param("key_word") String keyWord, @Param("publish_status") Integer publishStatus, IPage<ArticlePlus> myPage);
 
     ArticlePlus findArticlePlusById(@Param("id") String id);
 

@@ -1,6 +1,9 @@
 package com.dzl.blog2.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
+import com.dzl.blog2.enums.CopyRight;
+import com.dzl.blog2.enums.PublishStatus;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -34,5 +37,12 @@ public class Article extends Model<Article> {
     private Long likes;
 
     private Long playCount;
+
+    private PublishStatus publishStatus;
+
+    private CopyRight copyRight;
+
+    @TableField(exist = false)
+    private Catalog catalog;
 
 }

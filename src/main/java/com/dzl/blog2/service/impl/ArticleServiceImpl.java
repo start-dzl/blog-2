@@ -10,6 +10,7 @@ import com.dzl.blog2.dto.page.PageBody;
 import com.dzl.blog2.entity.Article;
 import com.dzl.blog2.entity.ArticleTag;
 import com.dzl.blog2.entity.Tag;
+import com.dzl.blog2.enums.PublishStatus;
 import com.dzl.blog2.exception.BizException;
 import com.dzl.blog2.mapper.ArticleMapper;
 import com.dzl.blog2.model.ArticlePlus;
@@ -54,6 +55,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         article.setPublishDate(LocalDateTime.now());
         article.setUpdateDate(LocalDateTime.now());
         article.setAuthor(input.getAuthor());
+        article.setPublishStatus(input.getPublishStatus());
         //获得文章html代码并生成摘要
         BuildArticleTabloidUtil buildArticleTabloidUtil = new BuildArticleTabloidUtil();
         article.setArticleTabloid(buildArticleTabloidUtil.buildArticleTabloid(input.getArticleContent()));
@@ -117,7 +119,9 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
     @Override
     public PageBody<ArticlePlus> findAll(ArticleSearchInput input) {
         IPage<ArticlePlus> page = new Page<>(input.getCurrent(), input.getSize());
-        List<ArticlePlus> allArticle = getBaseMapper().findAllArticle(input.getKeyWord(), page);
+        //设置只显示发布
+        input.setPublishStatus(PublishStatus.PUBLISH);
+        List<ArticlePlus> allArticle = getBaseMapper().findAllArticle(input.getKeyWord(), input.getPublishStatus().getValue(), page);
         return new PageBody<>(page, allArticle);
     }
 
