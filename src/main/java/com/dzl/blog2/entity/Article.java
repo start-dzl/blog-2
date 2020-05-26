@@ -42,6 +42,8 @@ public class Article extends Model<Article> {
 
     private CopyRight copyRight;
 
+    private String catalogId;
+
     @TableField(exist = false)
     private Catalog catalog;
 

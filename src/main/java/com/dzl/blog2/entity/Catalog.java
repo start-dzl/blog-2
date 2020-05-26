@@ -1,5 +1,4 @@
 package com.dzl.blog2.entity;
-
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -14,11 +13,6 @@ public class Catalog extends Model<Catalog> {
      * 标签名
      */
     private String name;
-
-/*
-    @TableField(exist = false)
-    private List<Article> articles;
-*/
 
 
 }

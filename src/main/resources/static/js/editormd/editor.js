@@ -229,9 +229,9 @@ surePublishBtn.click(function () {
         $('.notice-box-tags').show();
     } else if (articleTypeValue === "choose") {
         $('.notice-box-type').show();
-    } else if (articleCategoriesValue === "choose") {
-        $('.notice-box-categories').show();
-    } else if (articleGradeValue === "choose") {
+    } /*else if (articleCategoriesValue === "choose") {
+        $('.notice-box-categories').show();*/
+    else if (articleGradeValue === "choose") {
         $('.notice-box-grade').show();
     } else if (articleType.val() == "转载" && originalAuthorValue === "") {
         $('.notice-box-originalAuthor').show();
@@ -240,21 +240,15 @@ surePublishBtn.click(function () {
     } else {
         $.ajax({
             type: "POST",
-            url: "/publishArticle",
+            url: "/api/v0/article/create",
             traditional: true,// 传数组
-            data: {
-                id: $('.surePublishBtn').attr("id"),
-                articleTitle: articleTitle.val(),
-                articleContent: articleContent.val(),
-                articleTagsValue: articleTagsValue,
-                articleType: articleTypeValue,
-                articleCategories: articleCategoriesValue,
-                articleGrade: articleGradeValue,
-                originalAuthor: originalAuthorValue,
-                articleUrl: articleUrlValue,
-                articleHtmlContent: testEditor.getHTML()
-            },
-            contentType: "application/x-www-form-urlencoded; charset=utf-8",
+            data: JSON.stringify({
+                "articleContent": articleContent.val(),
+                "author": "dzl",
+                "publishStatus": "PUBLISH",
+                "title": articleTitle.val()
+            }),
+            contentType: 'application/json',
             dataType: "json",
             success: function (data) {
                 if (data['status'] == 200) {

@@ -45,6 +45,7 @@
         a.likes,
         a.play_count,
         a.publish_status,
+        a.catalog_id,
         t.id as t_id,
         t.name as t_name
         from article a
@@ -74,6 +75,8 @@
         likes,
         play_count,
         t.id as t_id,
+        publish_status,
+        catalog_id,
         t.name as t_name
         from article a
         left join article_tag t1 on a.id = t1.article_id

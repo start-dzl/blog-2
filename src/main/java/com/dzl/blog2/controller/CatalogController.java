@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v0/tag")
+@RequestMapping("/api/v0/catalog")
 public class CatalogController {
     @Autowired
     private ICatalogService iCatalogService;

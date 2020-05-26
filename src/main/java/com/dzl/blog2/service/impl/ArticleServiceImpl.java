@@ -9,6 +9,7 @@ import com.dzl.blog2.dto.article.ArticleSearchInput;
 import com.dzl.blog2.dto.page.PageBody;
 import com.dzl.blog2.entity.Article;
 import com.dzl.blog2.entity.ArticleTag;
+import com.dzl.blog2.entity.Catalog;
 import com.dzl.blog2.entity.Tag;
 import com.dzl.blog2.enums.PublishStatus;
 import com.dzl.blog2.exception.BizException;
@@ -24,6 +25,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -48,7 +50,10 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         if (articles.size() > 0) {
             throw new BizException("-1", "文章不允许重复标题");
         }
-        List<Tag> tags = iTagService.getBaseMapper().selectBatchIds(input.getTags());
+        List<Tag> tags = new ArrayList<>();
+        if (input.getTags() != null)
+            tags = iTagService.getBaseMapper().selectBatchIds(input.getTags());
+
         Article lastArticle = getBaseMapper().findLastArticle();
         Article article = new Article();
         article.setTitle(input.getTitle());
@@ -56,6 +61,10 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         if (lastArticle != null) {
             article.setLastArticleId(lastArticle.getId());
         }
+        //关联分类
+        Catalog catalog = iCatalogService.getBaseMapper().selectById(input.getCatalog());
+        if (catalog != null)
+            article.setCatalogId(catalog.getId());
         article.setPublishDate(LocalDateTime.now());
         article.setUpdateDate(LocalDateTime.now());
         article.setAuthor(input.getAuthor());
