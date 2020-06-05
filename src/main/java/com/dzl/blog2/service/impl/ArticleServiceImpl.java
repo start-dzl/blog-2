@@ -71,7 +71,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         article.setPublishStatus(input.getPublishStatus());
         //获得文章html代码并生成摘要
         BuildArticleTabloidUtil buildArticleTabloidUtil = new BuildArticleTabloidUtil();
-        article.setArticleTabloid(buildArticleTabloidUtil.buildArticleTabloid(input.getArticleContent()));
+        article.setArticleTabloid(buildArticleTabloidUtil.buildArticleTabloidV2(input.getArticleContent()));
         article.insert();
         if (lastArticle != null) {
             lastArticle.setNextArticleId(article.getId());
@@ -105,7 +105,7 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
             article.setArticleContent(input.getArticleContent());
             //获得文章html代码并生成摘要
             BuildArticleTabloidUtil buildArticleTabloidUtil = new BuildArticleTabloidUtil();
-            article.setArticleTabloid(buildArticleTabloidUtil.buildArticleTabloid(input.getArticleContent()));
+            article.setArticleTabloid(buildArticleTabloidUtil.buildArticleTabloidV2(input.getArticleContent()));
             isChange = true;
         }
         List<Tag> tags = iTagService.getBaseMapper().selectBatchIds(input.getTags());

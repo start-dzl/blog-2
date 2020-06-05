@@ -1,8 +1,34 @@
 package com.dzl.blog2.utils;
 
+import com.vladsch.flexmark.html.HtmlRenderer;
+import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.util.ast.Node;
+import com.vladsch.flexmark.util.data.MutableDataSet;
+import org.apache.commons.lang.StringEscapeUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.safety.Whitelist;
+
 public class BuildArticleTabloidUtil {
 
-    public String buildArticleTabloid(String htmlArticleComment) {
+    public String buildArticleTabloidV2(String htmlArticleComment) {
+        MutableDataSet options = new MutableDataSet();
+
+        Parser parser = Parser.builder(options).build();
+        HtmlRenderer renderer = HtmlRenderer.builder(options).build();
+
+        Node document = parser.parse(htmlArticleComment);
+        String html = renderer.render(document);
+        String myArticleTabloid = convert(html);
+        if (myArticleTabloid.length() > 300) {
+            myArticleTabloid = myArticleTabloid.substring(0, 300);
+        }
+
+        return myArticleTabloid;
+    }
+
+    public String buildArticleTabloidV1(String htmlArticleComment) {
 
         String regex = "\\s+";
         String str = htmlArticleComment.trim();
@@ -47,5 +73,22 @@ public class BuildArticleTabloidUtil {
         }
 
         return myArticleTabloid;
+    }
+
+    public String convert(String html) {
+        if (StringUtils.isEmpty(html)) {
+            return "";
+        }
+
+        Document document = Jsoup.parse(html);
+        Document.OutputSettings outputSettings = new Document.OutputSettings().prettyPrint(false);
+        document.outputSettings(outputSettings);
+        document.select("br").append("\\n");
+        document.select("p").prepend("\\n");
+        document.select("p").append("\\n");
+        String newHtml = document.html().replaceAll("\\\\n", "\n");
+        String plainText = Jsoup.clean(newHtml, "", Whitelist.none(), outputSettings);
+        String result = StringEscapeUtils.unescapeHtml(plainText.trim());
+        return result;
     }
 }
