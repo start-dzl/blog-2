@@ -125,6 +125,9 @@ function ajaxTag() {
             type: 'get',
             url: '/api/v0/tag/list/all',
             DataType: 'json',
+            headers: {
+                'Authorization': localStorage["token"]
+            },
             data: {}, success: function (data) {
                 if (data.length == 0) {
                     var tagCloud = $('#IndexTagCloud');
@@ -160,5 +163,7 @@ function localRefresh(currentPage, pageSize, isFirst) {
 
 
 }
+
+
 ajaxTag();
 localRefresh(1, 5, true);

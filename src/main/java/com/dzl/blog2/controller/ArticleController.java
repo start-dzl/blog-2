@@ -1,17 +1,14 @@
 package com.dzl.blog2.controller;
 
-import com.dzl.blog2.config.security.UserOrThrow;
 import com.dzl.blog2.dto.article.ArticleInput;
 import com.dzl.blog2.dto.article.ArticleSearchInput;
 import com.dzl.blog2.dto.page.PageBody;
-import com.dzl.blog2.entity.User;
 import com.dzl.blog2.exception.ResultBody;
 import com.dzl.blog2.model.ArticlePlus;
 import com.dzl.blog2.service.IArticleService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import springfox.documentation.annotations.ApiIgnore;
 
 import javax.validation.Valid;
 
@@ -48,22 +45,10 @@ public class ArticleController {
         return iArticleService.findAll(input);
     }
 
-    @ApiOperation(value = "所有文章列表")
-    @GetMapping("/listall")
-    public PageBody<ArticlePlus> listAll(@ApiIgnore @UserOrThrow User user) {
-        ArticleSearchInput articleSearchInput = new ArticleSearchInput();
-        articleSearchInput.setSize(3);
-        articleSearchInput.setCurrent(1);
-        return iArticleService.findAll(articleSearchInput);
-    }
-
-    @ApiOperation(value = "文章列表")
-    @GetMapping("/lists")
-    public PageBody<ArticlePlus> ats() {
-        ArticleSearchInput articleSearchInput = new ArticleSearchInput();
-        articleSearchInput.setCurrent(1);
-        articleSearchInput.setSize(3);
-        return iArticleService.findAll(articleSearchInput);
+    @ApiOperation(value = "后台文章列表")
+    @GetMapping("/backend/list")
+    public PageBody<ArticlePlus> backendList(@Valid ArticleSearchInput input) {
+        return iArticleService.findAllBackend(input);
     }
 
     @ApiOperation(value = "修改文章")

@@ -17,5 +17,7 @@ public interface IArticleService extends IService<Article> {
 
     PageBody<ArticlePlus> findAll(ArticleSearchInput input);
 
+    PageBody<ArticlePlus> findAllBackend(ArticleSearchInput input);
+
     ArticlePlus detail(String id);
 }

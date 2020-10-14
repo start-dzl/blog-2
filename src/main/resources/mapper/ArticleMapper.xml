@@ -58,8 +58,11 @@
                 or author like concat(concat('%',#{key_word}),'%')
                 or t.name like concat(concat('%',#{key_word}),'%')
             </if>
-            and a.publish_status = #{publish_status}
+            <if test="publish_status!=null">
+                and a.publish_status = #{publish_status}
+            </if>
         </where>
+        order by a.publish_date
     </select>
 
     <select id="findArticlePlusById" resultMap="ArticlePlus">

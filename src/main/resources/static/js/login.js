@@ -277,7 +277,7 @@ function ajaxLogin() {
             }
             localStorage["token"] = data["tokenType"] + " " + data["accessToken"];
             timeCount();
-            document.getElementById("fromLogin").submit()
+            window.location.assign("/")
         },
         error: function () {
             alert("异常")

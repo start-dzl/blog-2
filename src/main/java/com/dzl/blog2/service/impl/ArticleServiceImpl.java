@@ -45,7 +45,6 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
     public Article createArticle(ArticleInput input) {
         if (input.getTitle().isEmpty())
             throw new BizException("-1", "标题不为空");
-        ArticleMapper baseMapper = getBaseMapper();
         List<Article> articles = baseMapper.selectList(new QueryWrapper<Article>().lambda().eq(Article::getTitle, input.getTitle()));
         if (articles.size() > 0) {
             throw new BizException("-1", "文章不允许重复标题");
@@ -135,6 +134,18 @@ public class ArticleServiceImpl extends ServiceImpl<ArticleMapper, Article> impl
         //设置只显示发布
         input.setPublishStatus(PublishStatus.PUBLISH);
         List<ArticlePlus> allArticle = getBaseMapper().findAllArticle(input.getKeyWord(), input.getPublishStatus().getValue(), page);
+        return new PageBody<>(page, allArticle);
+    }
+
+    @Override
+    public PageBody<ArticlePlus> findAllBackend(ArticleSearchInput input) {
+        IPage<ArticlePlus> page = new Page<>(input.getCurrent(), input.getSize());
+        Integer integer = null;
+        if (input.getPublishStatus() != null) {
+            integer = input.getPublishStatus().getValue();
+        }
+
+        List<ArticlePlus> allArticle = getBaseMapper().findAllArticle(input.getKeyWord(), integer, page);
         return new PageBody<>(page, allArticle);
     }
 

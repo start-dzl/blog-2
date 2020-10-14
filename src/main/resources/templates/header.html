@@ -24,13 +24,13 @@
                         </ul>
                     </li>
                 </ul>
-                <div class="am-topbar-right" th:if="${#httpServletRequest.remoteUser}">
+                <div class="am-topbar-right" id="am-topbar-right1">
                     <div class="am-dropdown" data-am-dropdown="{boundary: '.am-topbar'}">
                         <button class="personalSpace am-btn am-btn-secondary am-topbar-btn am-btn-sm am-dropdown-toggle"
                                 data-am-dropdown-toggle><span sec:authentication="name"></span> <span
                                 class="am-icon-caret-down"></span></button>
                         <ul class="am-dropdown-content">
-                            <li><a href="/user" sec:authorize="hasRole('ROLE_USER')">个人主页</a></li>
+                            <li><a href="/" sec:authorize="hasRole('ROLE_USER')">个人主页</a></li>
                             <li><a href="/adminindex" sec:authorize="hasRole('ROLE_SUPERADMIN')">网站后台管理</a></li>
                             <li><a href="/editor">发布文章</a></li>
                             <li><a class="feedbackClick">反馈</a></li>
@@ -40,7 +40,7 @@
                     </div>
                 </div>
 
-                <div class="am-topbar-right" th:unless="${#httpServletRequest.remoteUser}">
+                <div class="am-topbar-right" id="am-topbar-right2">
                     <a class="am-btn am-btn-primary am-topbar-btn am-btn-sm am-round" href="/login"
                        style="color: white">管理员登录</a>
                 </div>

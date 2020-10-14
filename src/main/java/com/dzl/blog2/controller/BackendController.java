@@ -11,5 +11,10 @@ public class BackendController {
         return "editor";
     }
 
+    @GetMapping("/adminindex")
+    public String adminIndex() {
+        return "adminindex";
+    }
+
 
 }
