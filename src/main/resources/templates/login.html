@@ -32,8 +32,7 @@
                              src="https://dengzlcos-1253188131.cos.ap-shanghai.myqcloud.com/img/xg.png"/>
                     </div>
                     <div>
-                        <form class="am-form am-form-horizontal" id="fromLogin" method="post"
-                              th:action="@{/api/auth/sign}">
+                        <form class="am-form am-form-horizontal" method="post" th:action="@{/login}">
                             <div class="loginInput am-input-group am-u-lg-10 col-md-offset-2 am-form-icon am-form-feedback "
                                  style="margin-left: 0">
                                 <label class=" am-form-label">电话</label>
@@ -59,7 +58,7 @@
                             </div>
                             <br>
                             <div class="am-input-group am-u-lg-10 col-md-offset-2" style="margin-left: 0">
-                                <input class="am-btn am-btn-primary am-btn-sm am-fl" id="loginFormSubmit"
+                                <input class="am-btn am-btn-primary am-btn-sm am-fl" id="loginFormSubmit" type="submit"
                                        style="border-radius: 5px" value="登 录">
                                 <!-- 按钮触发模态框 -->
                                 <button class="am-btn am-btn-default am-btn-sm am-fr "

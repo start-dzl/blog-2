@@ -1,3 +1,4 @@
+/*
 function loginStatus() {
     var localStorageElement = localStorage["token"];
     if (typeof localStorageElement == "undefined" || localStorageElement == null || localStorageElement == "") {
@@ -9,4 +10,4 @@ function loginStatus() {
 }
 
 
-loginStatus();
+loginStatus();*/

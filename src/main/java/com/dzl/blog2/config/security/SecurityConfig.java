@@ -1,19 +1,15 @@
 package com.dzl.blog2.config.security;
 
+import com.dzl.blog2.utils.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.BeanIds;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -28,31 +24,26 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     UserDetailsService customUserDetailsService;
 
-    @Autowired
-    private JwtAuthEntryPoint unauthorizedHandler;
-
-    @Bean
-    public JwtAuthenticationFilter jwtAuthenticationFilter() {
-        return new JwtAuthenticationFilter();
-    }
 
     @Override
     public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
-        authenticationManagerBuilder
-                .userDetailsService(customUserDetailsService)
-                .passwordEncoder(passwordEncoder());
+        authenticationManagerBuilder.userDetailsService(customUserDetailsService)
+                //启动MD5加密
+                .passwordEncoder(new PasswordEncoder() {
+                    MD5Util md5Util = new MD5Util();
+
+                    @Override
+                    public String encode(CharSequence rawPassword) {
+                        return md5Util.encode((String) rawPassword);
+                    }
+
+                    @Override
+                    public boolean matches(CharSequence rawPassword, String encodedPassword) {
+                        return encodedPassword.equals(md5Util.encode((String) rawPassword));
+                    }
+                });
     }
 
-    @Bean(BeanIds.AUTHENTICATION_MANAGER)
-    @Override
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManagerBean();
-    }
-
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -61,12 +52,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .csrf()
                 .disable()
-                .exceptionHandling()
-                .authenticationEntryPoint(unauthorizedHandler)
-                .and()
-                .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
                 .authorizeRequests()
                 .antMatchers(
                         "/",
@@ -98,11 +83,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/api/auth/**",
                         "/api/v0/user/**"
                 )
-                .permitAll();
-                /*.antMatchers("/api/**")
-                .authenticated();*/
-        // Add our custom JWT security filter
-        http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+                .permitAll()
+                .and()
+                .formLogin().loginPage("/login").failureUrl("/login?error").defaultSuccessUrl("/")
+                .and()
+                .logout().logoutUrl("/logout").logoutSuccessUrl("/");
     }
 
     @Bean

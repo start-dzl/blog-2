@@ -37,7 +37,7 @@ loginFormSubmit.click(function () {
     var phone_value = phone.val();
     var pattren1 = /^1[345789]\d{9}$/;
     if (password_len !== 0 && phone_len !== 0 && pattren1.test(phone_value)) {
-        ajaxLogin()
+        return true;
     } else {
         if (phone_len === 0) {
             phone_null.show();
@@ -48,6 +48,7 @@ loginFormSubmit.click(function () {
         if (password_len === 0) {
             password_null.show();
         }
+        return false;
     }
 });
 password.focus(function () {

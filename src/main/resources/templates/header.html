@@ -24,7 +24,7 @@
                         </ul>
                     </li>
                 </ul>
-                <div class="am-topbar-right" id="am-topbar-right1">
+                <div class="am-topbar-right" th:if="${#httpServletRequest.remoteUser}">
                     <div class="am-dropdown" data-am-dropdown="{boundary: '.am-topbar'}">
                         <button class="personalSpace am-btn am-btn-secondary am-topbar-btn am-btn-sm am-dropdown-toggle"
                                 data-am-dropdown-toggle><span sec:authentication="name"></span> <span
@@ -40,7 +40,7 @@
                     </div>
                 </div>
 
-                <div class="am-topbar-right" id="am-topbar-right2">
+                <div class="am-topbar-right" th:unless="${#httpServletRequest.remoteUser}">
                     <a class="am-btn am-btn-primary am-topbar-btn am-btn-sm am-round" href="/login"
                        style="color: white">管理员登录</a>
                 </div>
