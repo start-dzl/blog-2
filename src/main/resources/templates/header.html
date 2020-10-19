@@ -30,8 +30,8 @@
                                 data-am-dropdown-toggle><span sec:authentication="name"></span> <span
                                 class="am-icon-caret-down"></span></button>
                         <ul class="am-dropdown-content">
-                            <li><a href="/" sec:authorize="hasRole('ROLE_USER')">个人主页</a></li>
-                            <li><a href="/adminindex" sec:authorize="hasRole('ROLE_SUPERADMIN')">网站后台管理</a></li>
+                            <li><a href="/" sec:authorize="hasAuthority('ROLE_USER')">个人主页</a></li>
+                            <li><a href="/adminindex" sec:authorize="hasAuthority('ROLE_SUPERADMIN')">网站后台管理</a></li>
                             <li><a href="/editor">发布文章</a></li>
                             <li><a class="feedbackClick">反馈</a></li>
                             <hr style="margin: 10px 0 5px 0;">
