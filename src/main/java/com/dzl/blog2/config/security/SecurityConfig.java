@@ -84,6 +84,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         "/api/v0/user/**"
                 )
                 .permitAll()
+                .antMatchers(
+                        "/api/v0/article/list"
+                )
+                .authenticated()
                 .and()
                 .formLogin().loginPage("/login").failureUrl("/login?error").defaultSuccessUrl("/")
                 .and()

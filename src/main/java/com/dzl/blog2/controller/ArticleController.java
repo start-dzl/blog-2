@@ -8,6 +8,7 @@ import com.dzl.blog2.model.ArticlePlus;
 import com.dzl.blog2.service.IArticleService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -41,6 +42,7 @@ public class ArticleController {
 
     @ApiOperation(value = "文章列表")
     @GetMapping("/list")
+    @PreAuthorize("hasAuthority('ARTICLE')")
     public PageBody<ArticlePlus> list(@Valid ArticleSearchInput input) {
         return iArticleService.findAll(input);
     }

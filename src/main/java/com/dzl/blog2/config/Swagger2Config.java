@@ -25,8 +25,8 @@ public class Swagger2Config {
     public Docket createRestApi() {
         ParameterBuilder tokenPar = new ParameterBuilder();
         List<Parameter> pars = new ArrayList<>();
-        tokenPar.name("Authorization")
-                .description("令牌")
+        tokenPar.name("Cookie")
+                .description("Cookie")
                 .modelRef(new ModelRef("string"))
                 .parameterType("header")
                 .required(false).build();
